@@ -8,6 +8,10 @@
   "alpaca_zh_demo": {
     "file_name": "alpaca_zh_demo.json"
   },
+  "alpaca_train_data": {
+    "file_name": "alpaca_train_data.json",
+    "formatting": "alpaca"
+  },
   "glaive_toolcall_en_demo": {
     "file_name": "glaive_toolcall_en_demo.json",
     "formatting": "sharegpt",
