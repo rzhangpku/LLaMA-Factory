@@ -16,7 +16,7 @@ from llamafactory.train.tuner import run_exp  # use absolute import
 
 
 def launch():
-    run_exp()
+    run_exp(share=True)
 
 
 if __name__ == "__main__":
