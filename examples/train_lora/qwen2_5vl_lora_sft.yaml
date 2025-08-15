@@ -12,8 +12,8 @@ lora_rank: 8
 lora_target: all
 
 ### dataset
-dataset: alpaca_train_data  # video: mllm_video_demo
-template: qwen3
+dataset: alpaca_zh_demo  # video: mllm_video_demo
+template: llama3
 cutoff_len: 2048
 max_samples: 1000
 overwrite_cache: true
