@@ -1,7 +1,7 @@
 #!/bin/bash
 
 python scripts/vllm_infer.py
-    --dataset alpaca_test_data
+    --dataset alpaca_spoken_train
     --model_name_or_path /aiplatform-sale/aiplatform-sale/group-shared/models/Qwen/Qwen3-1.7B
     --adapter_name_or_path saves/Qwen3-1.7B/lora/sft
     --template qwen3_nothink

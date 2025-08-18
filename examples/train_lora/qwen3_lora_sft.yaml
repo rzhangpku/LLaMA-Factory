@@ -12,7 +12,7 @@ lora_rank: 8
 lora_target: all
 
 ### dataset
-dataset: alpaca_train_data  # video: mllm_video_demo
+dataset: alpaca_spoken_train  # video: mllm_video_demo
 template: qwen3_nothink
 cutoff_len: 2048
 max_samples: 1000

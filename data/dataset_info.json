@@ -8,12 +8,12 @@
   "alpaca_zh_demo": {
     "file_name": "alpaca_zh_demo.json"
   },
-  "alpaca_train_data": {
-    "file_name": "alpaca_train_data.json",
+  "alpaca_spoken_train": {
+    "file_name": "alpaca_spoken_train.json",
     "formatting": "alpaca"
   },
-  "alpaca_test_data": {
-    "file_name": "alpaca_test_data.json",
+  "alpaca_spoken_test": {
+    "file_name": "alpaca_spoken_test.json",
     "formatting": "alpaca"
   },
   "glaive_toolcall_en_demo": {
