@@ -1,5 +1,5 @@
 ### model
-model_name_or_path: /aiplatform-sale/aiplatform-sale/group-shared/models/Qwen/Qwen3-1.7B
+model_name_or_path: /aiplatform-sale/aiplatform-sale/group-shared/models/Qwen/Qwen3-0.6B
 image_max_pixels: 262144
 video_max_pixels: 16384
 trust_remote_code: true
@@ -21,7 +21,7 @@ preprocessing_num_workers: 16
 dataloader_num_workers: 4
 
 ### output
-output_dir: saves/Qwen3-1.7B/lora/sft
+output_dir: saves/Qwen3-0.6B/lora/sft
 logging_steps: 10
 save_steps: 500
 plot_loss: true
