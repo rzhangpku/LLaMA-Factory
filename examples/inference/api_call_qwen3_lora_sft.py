@@ -21,7 +21,11 @@ def chat(user_sent):
     messages = [{"role": "system", "content": system_prompt}] + \
         [{"role": "user", "content": user_sent}]
     result = client.chat.completions.create(
-        messages=messages, model="/aiplatform-sale/aiplatform-sale/group-shared/models/Qwen/Qwen3-1.7B")
+        messages=messages, model="/aiplatform-sale/aiplatform-sale/group-shared/models/Qwen/Qwen3-1.7B", extra_body={
+            "thinking": {
+                "type": "disabled"
+            }
+        })
     content = result.choices[0].message.content
     # print(content)
     end_timer = time.time() * 1000
