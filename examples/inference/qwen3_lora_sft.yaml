@@ -5,3 +5,4 @@ finetuning_type: lora
 infer_backend: huggingface  # choices: [huggingface, vllm, sglang]
 trust_remote_code: true
 enable_thinking: false
+train.enable_thinking: false
