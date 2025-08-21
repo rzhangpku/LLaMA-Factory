@@ -56,13 +56,13 @@ LAYERNORM_NAMES = {"norm", "ln"}
 
 LLAMABOARD_CONFIG = "llamaboard_config.yaml"
 
-METHODS = ["full", "freeze", "lora"]
+METHODS = ["full", "freeze", "lora", "oft"]
 
 MOD_SUPPORTED_MODELS = {"bloom", "falcon", "gemma", "llama", "mistral", "mixtral", "phi", "starcoder2"}
 
 MULTIMODAL_SUPPORTED_MODELS = set()
 
-PEFT_METHODS = {"lora"}
+PEFT_METHODS = {"lora", "oft"}
 
 RUNNING_LOG = "running_log.txt"
 
@@ -757,9 +757,17 @@ register_model_group(
             DownloadSource.DEFAULT: "google/gemma-2-27b-it",
             DownloadSource.MODELSCOPE: "LLM-Research/gemma-2-27b-it",
         },
+        "Gemma-3-270M": {
+            DownloadSource.DEFAULT: "google/gemma-3-270m",
+            DownloadSource.MODELSCOPE: "LLM-Research/gemma-3-270m",
+        },
         "Gemma-3-1B": {
             DownloadSource.DEFAULT: "google/gemma-3-1b-pt",
             DownloadSource.MODELSCOPE: "LLM-Research/gemma-3-1b-pt",
+        },
+        "Gemma-3-270M-Instruct": {
+            DownloadSource.DEFAULT: "google/gemma-3-270m-it",
+            DownloadSource.MODELSCOPE: "LLM-Research/gemma-3-270m-it",
         },
         "Gemma-3-1B-Instruct": {
             DownloadSource.DEFAULT: "google/gemma-3-1b-it",
@@ -807,6 +815,10 @@ register_model_group(
         "MedGemma-4B-Instruct": {
             DownloadSource.DEFAULT: "google/medgemma-4b-it",
             DownloadSource.MODELSCOPE: "google/medgemma-4b-it",
+        },
+        "MedGemma-27B-Instruct": {
+            DownloadSource.DEFAULT: "google/medgemma-27b-text-it",
+            DownloadSource.MODELSCOPE: "google/medgemma-27b-text-it",
         },
     },
     template="gemma3",
@@ -1252,6 +1264,16 @@ register_model_group(
     multimodal=True,
 )
 
+register_model_group(
+    models={
+        "Intern-S1-mini": {
+            DownloadSource.DEFAULT: "internlm/Intern-S1-mini",
+            DownloadSource.MODELSCOPE: "Shanghai_AI_Laboratory/Intern-S1-mini",
+        }
+    },
+    template="intern_s1",
+    multimodal=True,
+)
 
 register_model_group(
     models={
@@ -1669,8 +1691,8 @@ register_model_group(
         },
         "MiMo-VL-7B-RL-2508": {
             DownloadSource.DEFAULT: "XiaomiMiMo/MiMo-VL-7B-RL-2508",
-            DownloadSource.MODELSCOPE: "XiaomiMiMo/MiMo-VL-7B-RL-2508"
-        }
+            DownloadSource.MODELSCOPE: "XiaomiMiMo/MiMo-VL-7B-RL-2508",
+        },
     },
     template="mimo_vl",
     multimodal=True,
@@ -1685,7 +1707,7 @@ register_model_group(
         },
         "MiMo-VL-7B-SFT-2508": {
             DownloadSource.DEFAULT: "XiaomiMiMo/MiMo-VL-7B-SFT-2508",
-            DownloadSource.DEFAULT: "XiaomiMiMo/MiMo-VL-7B-SFT-2508"
+            DownloadSource.DEFAULT: "XiaomiMiMo/MiMo-VL-7B-SFT-2508",
         },
     },
     template="qwen2_vl",
