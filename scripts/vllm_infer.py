@@ -187,6 +187,10 @@ def vllm_infer(
         all_labels.extend(labels)
         gc.collect()
 
+    end_timer = time.time() * 1000
+    elapse_time = end_timer - start_timer
+    print(f"elapse_time: {elapse_time} ms")
+
     # Write all results at once outside the loop
     with open(save_name, "w", encoding="utf-8") as f:
         for text, pred, label in zip(all_prompts, all_preds, all_labels):
@@ -195,9 +199,6 @@ def vllm_infer(
     print("*" * 70)
     print(f"{len(all_prompts)} total generated results have been saved at {save_name}.")
     print("*" * 70)
-    end_timer = time.time() * 1000
-    elapse_time = end_timer - start_timer
-    print(f"elapse_time: {elapse_time} ms")
 
 
 if __name__ == "__main__":
