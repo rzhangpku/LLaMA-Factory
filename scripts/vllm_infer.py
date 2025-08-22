@@ -14,6 +14,7 @@
 
 import gc
 import json
+import time
 from typing import Optional
 
 import fire
@@ -111,6 +112,7 @@ def vllm_infer(
 
     llm = LLM(**engine_args)
 
+    start_timer = time.time() * 1000
     # load datasets
     dataset_module = get_dataset(template_obj, model_args, data_args, training_args, "ppo", **tokenizer_module)
     train_dataset = dataset_module["train_dataset"]
@@ -193,6 +195,9 @@ def vllm_infer(
     print("*" * 70)
     print(f"{len(all_prompts)} total generated results have been saved at {save_name}.")
     print("*" * 70)
+    end_timer = time.time() * 1000
+    elapse_time = end_timer - start_timer
+    print(f"elapse_time: {elapse_time} ms")
 
 
 if __name__ == "__main__":
