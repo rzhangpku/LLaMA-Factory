@@ -18,6 +18,7 @@ import time
 from typing import Optional
 
 import fire
+import numpy as np
 from tqdm import tqdm
 from transformers import Seq2SeqTrainingArguments
 
@@ -112,7 +113,6 @@ def vllm_infer(
 
     llm = LLM(**engine_args)
 
-    start_timer = time.time() * 1000
     # load datasets
     dataset_module = get_dataset(template_obj, model_args, data_args, training_args, "ppo", **tokenizer_module)
     train_dataset = dataset_module["train_dataset"]
@@ -135,6 +135,9 @@ def vllm_infer(
     # Store all results in these lists
     all_prompts, all_preds, all_labels = [], [], []
 
+    elapse_time_list = []
+    start_timer = time.time() * 1000
+    print(f"batch_size: {batch_size}")
     # Add batch process to avoid the issue of too many files opened
     for i in tqdm(range(0, len(train_dataset), batch_size), desc="Processing batched inference"):
         vllm_inputs, prompts, labels = [], [], []
@@ -178,8 +181,13 @@ def vllm_infer(
                 )
             )
 
+        start_timer_i = time.time() * 1000
         results = llm.generate(vllm_inputs, sampling_params, lora_request=lora_request)
         preds = [result.outputs[0].text for result in results]
+        end_timer_i = time.time() * 1000
+        elapse_time_i = end_timer_i - start_timer_i
+        elapse_time_list.append(elapse_time_i)
+        print(f"elapse_time_i: {elapse_time_i} ms")
 
         # Accumulate results
         all_prompts.extend(prompts)
@@ -190,6 +198,10 @@ def vllm_infer(
     end_timer = time.time() * 1000
     elapse_time = end_timer - start_timer
     print(f"elapse_time: {elapse_time} ms")
+    avg_elapse_time = np.mean(elapse_time_list)
+    median_elapse_time = np.median(elapse_time_list)
+    print(f"avg_elapse_time: {avg_elapse_time} ms")
+    print(f"median_elapse_time: {median_elapse_time} ms")
 
     # Write all results at once outside the loop
     with open(save_name, "w", encoding="utf-8") as f:
